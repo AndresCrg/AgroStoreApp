@@ -46,8 +46,25 @@ const getUsers = async (req = request, res) => {
     })
 }
 
+const updateUser = async (req = request, res = response) => {
+    const document = req.params.id;
+    const { ...toUpdate } = req.body;
+    const result = await prisma.user.update({
+        where: {
+            document,
+        },
+        data: toUpdate,
+    });
+    res.json({
+        msg: 'Empleado actualizado exitosamente!',
+        result
+    });
+    console.log(result);
+};
+
 module.exports = {
     getUserById,
     createUser,
-    getUsers
+    getUsers,
+    updateUser
 }
