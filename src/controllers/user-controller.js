@@ -39,7 +39,15 @@ const getUserById = async (req = request, res) => {
     })
 }
 
+const getUsers = async (req = request, res) => {
+    const results = await prisma.user.findMany({})
+    res.json({
+        user: results
+    })
+}
+
 module.exports = {
     getUserById,
-    createUser
+    createUser,
+    getUsers
 }
