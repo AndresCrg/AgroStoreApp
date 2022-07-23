@@ -27,13 +27,19 @@ const createUser = async (req = request, res) => {
     });
 }
 
-const getUser = (req = request, res) => {
+const getUserById = async (req = request, res) => {
+    const id = req.params.id
+    const result = await prisma.user.findUnique({
+        where:{
+            document: id
+        }
+    })
     res.json({
-        msg:'Hola!!'
+        user: result
     })
 }
 
 module.exports = {
-    getUser,
+    getUserById,
     createUser
 }
