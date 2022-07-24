@@ -4,6 +4,7 @@ const { check } = require('express-validator');
 const { validateFields } = require('../middlewares/validate-filelds');
 const { getUserById, createUser, getUsers, updateUser } = require('../controllers/user-controller');
 const { documentExist, emailExist, documentExistById } = require('../middlewares/validate-db');
+const { validateJWT } = require('../middlewares/validate-jwt');
 
 const router = Router();
 
@@ -23,10 +24,10 @@ router.post(
 	createUser
 );
 
-router.get('/:id', [check('id').custom(documentExistById), validateFields], getUserById);
+router.get('/:id', [validateJWT, check('id').custom(documentExistById), validateFields], getUserById);
 
 router.get('/', getUsers);
 
-router.put('/:id', [check('id').custom(documentExistById), validateFields], updateUser);
+router.put('/:id', [validateJWT ,check('id').custom(documentExistById), validateFields], updateUser);
 
 module.exports = router;
