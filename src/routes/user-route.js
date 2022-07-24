@@ -23,7 +23,7 @@ router.post(
 	createUser
 );
 
-router.get('/:id', getUserById);
+router.get('/:id', [check('id').custom(documentExistById), validateFields], getUserById);
 
 router.get('/', getUsers);
 

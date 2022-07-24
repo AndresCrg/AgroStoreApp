@@ -41,7 +41,7 @@ const emailExistCredential = async (email = '') => {
 };
 
 const emailDoesNotRegistry = async (email = '') => {
-	const existEmail = await prisma.crendential.findFirst({
+	const existEmail = await prisma.credential.findFirst({
 		where: { email },
 	});
 	if (!existEmail) {
