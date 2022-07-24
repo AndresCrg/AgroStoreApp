@@ -15,7 +15,6 @@ const patchAccount = async (req = request, res = response) => {
         msg: 'Empleado borrado exitosamente!',
         state: result,
     });
-    console.log(document);
 }
 
 module.exports = {
