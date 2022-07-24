@@ -1,10 +1,13 @@
 const {request, response} = require('express')
+const bcryptjs = require('bcryptjs')
 const { PrismaClient} = require('@prisma/client')
 
 const prisma = new PrismaClient()
 
 const createUser = async (req = request, res) => {
     const { fullName, documentType, document, address, city, phoneNumber, email, password } = req.body;
+    const salt = bcryptjs.genSaltSync();
+    let passwordEncrypt = bcryptjs.hashSync(password, salt);
     const result = await prisma.user.create({
         data: {
             full_name: fullName,
@@ -16,7 +19,7 @@ const createUser = async (req = request, res) => {
             credential: {
                 create:{
                     email,
-                    password
+                    password: passwordEncrypt
                 }
             },
         },
@@ -66,5 +69,5 @@ module.exports = {
     getUserById,
     createUser,
     getUsers,
-    updateUser
+    updateUser,
 }

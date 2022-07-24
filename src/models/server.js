@@ -4,9 +4,12 @@ const cors = require('cors')
 
 class Server {
 
+
     constructor() {
         this.app = express()
         this.port = process.env.PORT
+        this.pathUsers = '/api/users';
+        this.pathCredential = '/api/account'
         this.middleware()
         this.routes()
     }
@@ -16,7 +19,8 @@ class Server {
     }
 
     routes(){
-        this.app.use('/api/users', require('../routes/user-route'))
+        this.app.use(this.pathUsers, require('../routes/user-route'))
+        this.app.use(this.pathCredential, require('../routes/credential-route'))
     }
 
     listen(){
