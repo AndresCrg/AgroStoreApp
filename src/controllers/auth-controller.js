@@ -21,16 +21,16 @@ const login = async (req, res) => {
 		});
 	}
 
-	if (accountUser.state == 'D' || accountUser.state == 'B') {
+	if (accountUser.state === 'D' || accountUser.state === 'B') {
 		return res.status(404).json({
 			msg: 'Cuenta no exite o está bloqueada',
 		});
 	}
 
 	const token = await generateJWT(accountUser.id, accountUser.email);
-
 	res.json({
-		token
+		token,
+		role: accountUser.role
 	});
 };
 
