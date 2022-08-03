@@ -25,7 +25,7 @@ const createUser = async (req, res) => {
 	});
 	console.log(result);
 	res.json({
-		msg: 'Empleado creado exitosamente!',
+		msg: 'Usuario creado exitosamente!',
 	});
 };
 
@@ -76,10 +76,30 @@ const updateUser = async (req, res = response) => {
 		});
 	}
 	res.json({
-		msg: 'Empleado actualizado exitosamente!',
+		msg: 'Usuario actualizado exitosamente!',
 		result,
 	});
 	console.log(result);
+};
+
+const deleteUser = async (req, res) => {
+	const document = req.params.id;
+	const myUser = await prisma.user.update({
+		where: {
+			document,
+		},
+		data: {
+			credentialId: {
+				update: {
+					state: 'D',
+				},
+			},
+		},
+	});
+	res.json({
+		msg: 'Usuario borrado exitosamente!',
+		myUser,
+	});
 };
 
 module.exports = {
