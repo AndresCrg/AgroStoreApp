@@ -37,7 +37,7 @@ const getUserById = async (req, res) => {
 		},
 	});
 	res.json({
-		data: result
+		data: result,
 	});
 };
 
@@ -45,7 +45,7 @@ const getUsers = async (req, res) => {
 	const results = await prisma.user.findMany({});
 	res.json({
 		success: 1,
-		data: results
+		data: results,
 	});
 };
 
@@ -81,26 +81,6 @@ const updateUser = async (req, res = response) => {
 		result,
 	});
 	console.log(result);
-};
-
-const deleteUser = async (req, res) => {
-	const document = req.params.id;
-	const myUser = await prisma.user.update({
-		where: {
-			document,
-		},
-		data: {
-			credentialId: {
-				update: {
-					state: 'D',
-				},
-			},
-		},
-	});
-	res.json({
-		msg: 'Usuario borrado exitosamente!',
-		myUser,
-	});
 };
 
 module.exports = {

@@ -30,6 +30,4 @@ router.get('/', getUsers);
 
 router.put('/:id', [validateJWT, check('id').custom(documentExistById), validateFields], updateUser);
 
-router.patch('/:id', [validateJWT, check('id').custom(documentExistById), validateFields], deleteUser);
-
 module.exports = router;
