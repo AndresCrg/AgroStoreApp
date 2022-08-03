@@ -6,6 +6,7 @@ const { prisma } = require('../controllers/user-controller');
  */
 
 const documentExist = async (document = '') => {
+
 	const existDocument = await prisma.user.findFirst({ where: { document } });
 	if (existDocument) {
 		throw new Error(`El documento: ${document}, ya está registrado!`);
@@ -22,7 +23,8 @@ const documentExistById = async (document = '') => {
 };
 
 const emailExist = async (email = '') => {
-	const existEmail = await prisma.user.findFirst({ where: { email } });
+	const credentialId = email
+	const existEmail = await prisma.user.findFirst({ where: { credentialId } });
 	if (existEmail) {
 		throw new Error(`El correo: ${email}, ya está registrado!`);
 	}

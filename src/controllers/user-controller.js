@@ -37,14 +37,15 @@ const getUserById = async (req, res) => {
 		},
 	});
 	res.json({
-		user: result,
+		data: result
 	});
 };
 
 const getUsers = async (req, res) => {
 	const results = await prisma.user.findMany({});
 	res.json({
-		users: results,
+		success: 1,
+		data: results
 	});
 };
 
@@ -52,7 +53,7 @@ const updateUser = async (req, res = response) => {
 	const document = req.params.id;
 	const { email } = req.body;
 	const { ...toUpdate } = req.body;
-	let result = {};
+	let result;
 
 	if (!email) {
 		result = await prisma.user.update({

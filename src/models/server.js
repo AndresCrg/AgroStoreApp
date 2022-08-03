@@ -5,6 +5,7 @@ const cors = require('cors');
 class Server {
 	constructor() {
 		this.app = express();
+		this.app.use(cors())
 		this.port = process.env.PORT;
 		this.pathUsers = '/api/users';
 		this.pathCredential = '/api/account';
