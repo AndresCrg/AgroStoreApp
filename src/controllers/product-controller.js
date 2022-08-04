@@ -22,6 +22,48 @@ const createProduct = async (req, res) => {
 	});
 };
 
+const getProductById = async (req, res) => {
+	const id = req.params.id;
+	const result = await prisma.product.findUnique({
+		where: {
+			id,
+		},
+	});
+	res.json({
+		data: result,
+	});
+};
+
+const getAllProducts = async (req, res) => {
+	const results = await prisma.product.findMany({});
+	res.json({
+		success: 1,
+		data: results,
+	});
+};
+
+const updateProduct = async (req, res) => {
+	const id = req.params.id;
+	const { ...toUpdate } = req.body;
+	const result = await prisma.product.update({
+		where: {
+			id,
+		},
+		data: toUpdate,
+	});
+
+	res.json({
+		msg: 'Producto actualizado exitosamente!',
+		data: result,
+	});
+};
+
+const deleteProduct = (req, res) => {};
+
 module.exports = {
 	createProduct,
+	getProductById,
+	getAllProducts,
+	updateProduct,
+	deleteProduct,
 };

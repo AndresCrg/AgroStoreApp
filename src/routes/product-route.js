@@ -1,6 +1,6 @@
 const { Router } = require('express');
 const { check } = require('express-validator');
-const { createProduct } = require('../controllers/product-controller');
+const { createProduct, getProductById, getAllProducts, updateProduct, deleteProduct } = require('../controllers/product-controller');
 const { validateFields } = require('../middlewares/validate-filelds');
 
 const router = Router();
@@ -21,5 +21,13 @@ router.post(
 	],
 	createProduct
 );
+
+router.get('/:id', getProductById)
+
+router.get('/', getAllProducts)
+
+router.put('/:id', updateProduct)
+
+router.patch('/id', deleteProduct)
 
 module.exports = router;
