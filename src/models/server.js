@@ -10,6 +10,7 @@ class Server {
 		this.pathCredential = '/api/account';
 		this.pathAuth = '/api/auth';
 		this.pathProducts = '/api/products';
+		this.pathFilters = '/api/filters';
 		this.middleware();
 		this.routes();
 	}
@@ -23,7 +24,8 @@ class Server {
 		this.app.use(this.pathUsers, require('../routes/user-route'));
 		this.app.use(this.pathCredential, require('../routes/credential-route'));
 		this.app.use(this.pathAuth, require('../routes/auth-route'));
-		this.app.use(this.pathProducts, require('../routes/product-route'))
+		this.app.use(this.pathProducts, require('../routes/product-route'));
+		this.app.user(this.pathFilters, require('../routes/filter-route'));
 	}
 
 	listen() {

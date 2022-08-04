@@ -22,12 +22,12 @@ router.post(
 	createProduct
 );
 
-router.get('/:id', getProductById)
+router.get('/:id', getProductById);
 
-router.get('/', getAllProducts)
+router.get('/', getAllProducts);
 
-router.put('/:id', updateProduct)
+router.put('/:id', updateProduct);
 
-router.patch('/id', deleteProduct)
+router.patch('/id', deleteProduct);
 
 module.exports = router;
