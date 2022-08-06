@@ -11,7 +11,7 @@ class Server {
 		this.pathAuth = '/api/auth';
 		this.pathProducts = '/api/products';
 		this.pathFilters = '/api/filters';
-		this.pathFiltersV2 = '/api/filtersV2/';
+		this.pathFiltersV2 = '/api/filtersV2';
 		this.middleware();
 		this.routes();
 	}

@@ -5,6 +5,6 @@ const router = Router();
 
 router.get('/:lowerPrice/:higherPrice', filterByPriceRange);
 
-router.get('/', filterByUnits);
+router.get('/:units', filterByUnits);
 
 module.exports = router;
