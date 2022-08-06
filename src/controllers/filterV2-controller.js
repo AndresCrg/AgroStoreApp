@@ -24,6 +24,19 @@ const filterByPriceRange = async (req, res) => {
 	});
 };
 
+const filterByUnits = async (req, res) => {
+	const units = req.params.units;
+	const results = await prisma.product.findMany({
+		where: {
+			units,
+		},
+	});
+	res.json({
+		data: results,
+	});
+};
+
 module.exports = {
 	filterByPriceRange,
+	filterByUnits,
 };

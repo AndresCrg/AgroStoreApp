@@ -11,10 +11,10 @@ router.get('/', filterProductsByDateToday);
 //esta semana
 router.get('/:startWeek/:endWeek', filterProductsByDateWeek);
 
-//rango de precios
-
 //unidades
 
 //eliminar productos
+
+//estandarizar nombres -bd
 
 module.exports = router;
