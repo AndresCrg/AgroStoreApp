@@ -1,13 +1,12 @@
 const { Router } = require('express');
-const { filterByTypeProduct, filterByHarvestDate, filterProductsByDateToday } = require('../controllers/filter-controller');
+const { filterByTypeProduct, filterProductsByDateToday } = require('../controllers/filter-controller');
 
 const router = Router();
 
 router.get('/:typeProduct', filterByTypeProduct);
 
-router.get('/:today', filterProductsByDateToday);
+router.get('/', filterProductsByDateToday);
 
-router.get('/:harvestDate/:2', filterByHarvestDate);
 //dia actual
 //esta semana
 

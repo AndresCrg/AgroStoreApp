@@ -1,5 +1,5 @@
 const { prisma } = require('./user-controller');
-const { formatDate, convertToDate } = require('../helpers/convertToDate');
+const { testDate, convertToDate, test2 } = require('../helpers/convertToDate');
 
 const filterByTypeProduct = async (req, res) => {
 	const typeProduct = req.params.typeProduct;
@@ -13,8 +13,8 @@ const filterByTypeProduct = async (req, res) => {
 	});
 };
 
-const filterByHarvestDate = async (req, res) => {
-	const harvestDate = req.params.harvestDate;
+const filterProductsByDateToday = async (req, res) => {
+	const harvestDate = new Date(req.body.harvestDate);
 	const results = await prisma.product.findMany({
 		where: {
 			harvestDate,
@@ -25,20 +25,7 @@ const filterByHarvestDate = async (req, res) => {
 	});
 };
 
-const filterProductsByDateToday = async (req, res) => {
-	const today = req.params.today;
-	const results = await prisma.product.findMany({
-		where: {
-			harvestDate: convertToDate(today),
-		},
-	});
-	res.json({
-		data: results,
-	});
-};
-
 module.exports = {
 	filterByTypeProduct,
-	filterByHarvestDate,
 	filterProductsByDateToday,
 };
