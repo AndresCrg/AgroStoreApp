@@ -1,12 +1,20 @@
 const { Router } = require('express');
-const { filterByTypeProduct, filterByHarvestDate, filterByHarvestLocation } = require('../controllers/filter-controller');
+const { filterByTypeProduct, filterByHarvestDate, filterProductsByDateToday } = require('../controllers/filter-controller');
 
 const router = Router();
 
 router.get('/:typeProduct', filterByTypeProduct);
 
-router.get('/:harvestDate', filterByHarvestDate);
+router.get('/:today', filterProductsByDateToday);
 
-router.get('/:harvestLocation', filterByHarvestLocation);
+router.get('/:harvestDate/:2', filterByHarvestDate);
+//dia actual
+//esta semana
+
+//rango de precios
+
+//unidades
+
+//eliminar productos
 
 module.exports = router;
