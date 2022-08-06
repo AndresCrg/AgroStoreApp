@@ -25,7 +25,32 @@ const filterProductsByDateToday = async (req, res) => {
 	});
 };
 
+const filterProductsByDateWeek = async (req, res) => {
+	const startWeek = new Date(req.params.startWeek);
+	const endWeek = new Date(req.params.endWeek);
+	const results = await prisma.product.findMany({
+		where: {
+			AND: [
+				{
+					harvestDate: {
+						gte: startWeek,
+					},
+				},
+				{
+					harvestDate: {
+						lte: endWeek,
+					},
+				},
+			],
+		},
+	});
+	res.json({
+		data: results,
+	});
+};
+
 module.exports = {
 	filterByTypeProduct,
 	filterProductsByDateToday,
+	filterProductsByDateWeek,
 };
