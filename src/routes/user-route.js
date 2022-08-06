@@ -28,6 +28,6 @@ router.get('/:id', [validateJWT, check('id').custom(documentExistById), validate
 
 router.get('/', getUsers);
 
-router.put('/:id', [validateJWT ,check('id').custom(documentExistById), validateFields], updateUser);
+router.put('/:id', [validateJWT, check('id').custom(documentExistById), validateFields], updateUser);
 
 module.exports = router;

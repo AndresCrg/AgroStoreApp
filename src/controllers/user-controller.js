@@ -25,7 +25,7 @@ const createUser = async (req, res) => {
 	});
 	console.log(result);
 	res.json({
-		msg: 'Empleado creado exitosamente!',
+		msg: 'Usuario creado exitosamente!',
 	});
 };
 
@@ -37,7 +37,7 @@ const getUserById = async (req, res) => {
 		},
 	});
 	res.json({
-		data: result
+		data: result,
 	});
 };
 
@@ -45,7 +45,7 @@ const getUsers = async (req, res) => {
 	const results = await prisma.user.findMany({});
 	res.json({
 		success: 1,
-		data: results
+		data: results,
 	});
 };
 
@@ -77,7 +77,7 @@ const updateUser = async (req, res = response) => {
 		});
 	}
 	res.json({
-		msg: 'Empleado actualizado exitosamente!',
+		msg: 'Usuario actualizado exitosamente!',
 		result,
 	});
 	console.log(result);
