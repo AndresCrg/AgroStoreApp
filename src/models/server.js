@@ -25,7 +25,7 @@ class Server {
 		this.app.use(this.pathCredential, require('../routes/credential-route'));
 		this.app.use(this.pathAuth, require('../routes/auth-route'));
 		this.app.use(this.pathProducts, require('../routes/product-route'));
-		this.app.user(this.pathFilters, require('../routes/filter-route'));
+		this.app.use(this.pathFilters, require('../routes/filter-route'));
 	}
 
 	listen() {
