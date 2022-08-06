@@ -11,6 +11,7 @@ class Server {
 		this.pathAuth = '/api/auth';
 		this.pathProducts = '/api/products';
 		this.pathFilters = '/api/filters';
+		this.pathFiltersV2 = '/api/filters/v2';
 		this.middleware();
 		this.routes();
 	}
@@ -26,6 +27,7 @@ class Server {
 		this.app.use(this.pathAuth, require('../routes/auth-route'));
 		this.app.use(this.pathProducts, require('../routes/product-route'));
 		this.app.use(this.pathFilters, require('../routes/filter-route'));
+		this.app.use(this.pathFiltersV2, require('../routes/filterV2-route'));
 	}
 
 	listen() {
