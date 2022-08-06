@@ -68,7 +68,7 @@ const updateUser = async (req, res = response) => {
 				document,
 			},
 			data: {
-				credentialId: {
+				credential: {
 					update: {
 						email,
 					},
