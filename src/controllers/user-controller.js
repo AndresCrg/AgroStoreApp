@@ -4,17 +4,17 @@ const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 
 const createUser = async (req, res) => {
-	const { fullName, documentType, document, address, city, phoneNumber, email, password } = req.body;
+	const { full_name, document_type, document, address, city, phone_number, email, password } = req.body;
 	const salt = bcryptjs.genSaltSync();
 	let passwordEncrypt = bcryptjs.hashSync(password, salt);
 	const result = await prisma.user.create({
 		data: {
-			full_name: fullName,
-			document_type: documentType,
+			full_name,
+			document_type,
 			document,
 			address,
 			city,
-			phone_number: phoneNumber,
+			phone_number,
 			credential: {
 				create: {
 					email,
@@ -30,10 +30,10 @@ const createUser = async (req, res) => {
 };
 
 const getUserById = async (req, res) => {
-	const id = req.params.id;
+	const document = req.params.id;
 	const result = await prisma.user.findUnique({
 		where: {
-			document: id,
+			document,
 		},
 	});
 	res.json({
