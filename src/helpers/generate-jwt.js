@@ -7,7 +7,7 @@ const generateJWT = (uid = '', email = '') => {
 			payload,
 			process.env.SECRETEORPRIVATEKEY,
 			{
-				expiresIn: 2400,
+				expiresIn: 24000,
 			},
 			(error, token) => {
 				if (error) {
