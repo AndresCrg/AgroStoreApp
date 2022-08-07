@@ -6,7 +6,7 @@ const { validateFields } = require('../middlewares/validate-filelds');
 const router = Router();
 
 router.post(
-	'/',
+	'/:userId',
 	[
 		check('name', 'El nombre es obligatorio').not().isEmpty(),
 		check('type', 'El tipo de cultivo no es valido!').isIn(['FRUITS', 'CEREALS', 'LEGOMINOUS', 'VEGETABLES', 'TUBERS']),
