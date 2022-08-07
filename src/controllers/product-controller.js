@@ -65,25 +65,10 @@ const updateProduct = async (req, res) => {
 };
 
 const getProductsByUser = async (req, res) => {
-	const { userId, email } = req.body;
+	const { userId } = req.body;
 	const results = await prisma.product.findMany({
 		where: {
-			AND: [
-				{
-					userId,
-				},
-				{
-					userId: {
-						where: {
-							credentialId: {
-								where: {
-									email,
-								},
-							},
-						},
-					},
-				},
-			],
+			userId
 		},
 	});
 	res.json({
