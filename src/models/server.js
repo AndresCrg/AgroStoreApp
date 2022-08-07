@@ -13,6 +13,7 @@ class Server {
 		this.pathFilters = '/api/filters';
 		this.middleware();
 		this.routes();
+		this.app.use(cors());
 	}
 
 	middleware() {
