@@ -26,7 +26,7 @@ const getProductById = async (req, res) => {
 	const id = req.params.id;
 	const result = await prisma.product.findUnique({
 		where: {
-			id,
+			id: parseInt(id)
 		},
 	});
 	res.json({
@@ -47,7 +47,7 @@ const updateProduct = async (req, res) => {
 	const { ...toUpdate } = req.body;
 	const result = await prisma.product.update({
 		where: {
-			id,
+			id: parseInt(id)
 		},
 		data: toUpdate,
 	});
