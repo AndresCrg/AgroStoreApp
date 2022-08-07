@@ -29,7 +29,7 @@ class Server {
 		this.app.use(this.pathProducts, require('../routes/product-route'));
 		this.app.use(this.pathFilters, require('../routes/filter-route'));
 		this.app.use(this.pathFiltersV2, require('../routes/filterV2-route'));
-		this.app.use(this.pathSalePromise, require('../routes/sale-promises-route'))
+		this.app.use(this.pathSalePromise, require('../routes/sale-promises-route'));
 	}
 
 	listen() {

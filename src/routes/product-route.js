@@ -30,6 +30,6 @@ router.get('/:userId/:email', getProductsByUser);
 
 router.put('/:id', updateProduct);
 
-router.patch('/id', deleteProduct);
+router.patch('/:id', deleteProduct);
 
 module.exports = router;

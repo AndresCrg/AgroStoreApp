@@ -91,7 +91,19 @@ const getProductsByUser = async (req, res) => {
 	});
 };
 
-const deleteProduct = (req, res) => {};
+const deleteProduct = async (req, res) => {
+	const id = req.params.id;
+	const result = await prisma.product.update({
+		where: {
+			id,
+		},
+		state: 'D',
+	});
+	res.json({
+		msg: 'Producto eliminado exitosamente!',
+		data: result,
+	});
+};
 
 module.exports = {
 	createProduct,

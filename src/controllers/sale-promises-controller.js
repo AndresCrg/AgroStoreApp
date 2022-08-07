@@ -1,21 +1,34 @@
-const { calculateTotal } = require('../helpers/calculateTotalSalePromise');
 const { convertToDate } = require('../helpers/convertToDate');
 const { prisma } = require('./user-controller');
 
 const createSalePromise = async (req, res) => {
-	const userSellerId = req.params.userSellerId;
-	const userBuyerId = req.params.userBuyerId;
-	const productId = req.params.productId;
-	const { date, statusSale, saleQuantity, pricePerUnit } = req.body;
+	const userSellerId = parseInt(req.params.userSellerId);
+	const userBuyerId = parseInt(req.params.userBuyerId);
+	const productId = parseInt(req.params.productId);
+	const { date, statusSale, saleQuantity, pricePerUnit, total } = req.body;
 	const result = await prisma.salePromise.create({
-		userSellerId,
-		userBuyerId,
-		productId,
-		date: convertToDate(date),
-		statusSale,
-		saleQuantity,
-		pricePerUnit,
-		total: calculateTotal(saleQuantity, pricePerUnit),
+		data: {
+			seller: {
+				connect: {
+					id: userSellerId,
+				},
+			},
+			buyer: {
+				connect: {
+					id: userBuyerId,
+				},
+			},
+			product: {
+				connect: {
+					id: productId,
+				},
+			},
+			date: convertToDate(date),
+			statusSale,
+			saleQuantity,
+			pricePerUnit,
+			total,
+		},
 	});
 	res.json({
 		msg: 'Promesa de venta creada exitosamente!',

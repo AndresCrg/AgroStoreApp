@@ -3,6 +3,6 @@ const { createSalePromise } = require('../controllers/sale-promises-controller')
 
 const router = Router();
 
-router.get('/:userSellerId/:userBuyerId/:productId', createSalePromise);
+router.post('/:userSellerId/:userBuyerId/:productId', createSalePromise);
 
 module.exports = router;
