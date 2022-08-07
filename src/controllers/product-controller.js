@@ -2,6 +2,7 @@ const { convertToDate } = require('../helpers/convertToDate');
 const { prisma } = require('./user-controller');
 
 const createProduct = async (req, res) => {
+	const userId = parseInt(req.params.userId);
 	const { name, type, harvestDate, harvestLocation, units, quantityAvalible, pricePerunit, image, description } = req.body;
 	const result = await prisma.product.create({
 		data: {
@@ -14,6 +15,11 @@ const createProduct = async (req, res) => {
 			pricePerunit,
 			image,
 			description,
+			User: {
+				connect: {
+					id: userId,
+				},
+			},
 		},
 	});
 	res.json({
