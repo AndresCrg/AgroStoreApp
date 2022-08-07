@@ -1,6 +1,6 @@
 const { Router } = require('express');
 const { check } = require('express-validator');
-const { createProduct, getProductById, getAllProducts, updateProduct, deleteProduct } = require('../controllers/product-controller');
+const { createProduct, getProductById, getAllProducts, updateProduct, deleteProduct, getProductsByUser } = require('../controllers/product-controller');
 const { validateFields } = require('../middlewares/validate-filelds');
 
 const router = Router();
@@ -25,6 +25,8 @@ router.post(
 router.get('/:id', getProductById);
 
 router.get('/', getAllProducts);
+
+router.get('/:userId/:email', getProductsByUser);
 
 router.put('/:id', updateProduct);
 
