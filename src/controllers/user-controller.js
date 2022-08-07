@@ -1,5 +1,5 @@
 const bcryptjs = require('bcryptjs');
-const {PrismaClient} = require('@prisma/client');
+const { PrismaClient } = require('@prisma/client');
 
 const prisma = new PrismaClient();
 
@@ -44,11 +44,11 @@ const getUserById = async (req, res) => {
 };
 
 const getUsers = async (req, res) => {
-    const results = await prisma.user.findMany({});
-    res.json({
-        success: 1,
-        data: results,
-    });
+	const results = await prisma.user.findMany({});
+	res.json({
+		success: 1,
+		data: results,
+	});
 };
 
 const updateUser = async (req, res = response) => {
@@ -83,9 +83,9 @@ const updateUser = async (req, res = response) => {
 };
 
 module.exports = {
-    getUserById,
-    createUser,
-    getUsers,
-    updateUser,
-    prisma,
+	getUserById,
+	createUser,
+	getUsers,
+	updateUser,
+	prisma,
 };
