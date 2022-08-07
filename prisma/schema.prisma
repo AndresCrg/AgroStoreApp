@@ -21,7 +21,7 @@ model Product {
   pricePerunit     Int             @db.Int
   image            String          @db.VarChar(255)
   description      String          @db.VarChar(180)
-  state            State
+  state            State?          @default(A)
   SalePromise      SalePromise[]
   User             User            @relation(fields: [userId], references: [id])
   userId           Int
@@ -99,18 +99,18 @@ enum Role {
 }
 
 model SalePromise {
-  id           Int        @id @default(autoincrement())
-  seller       User       @relation("seller", fields: [userSellerId], references: [id])
+  id           Int         @id @default(autoincrement())
+  seller       User        @relation("seller", fields: [userSellerId], references: [id])
   userSellerId Int
-  buyer        User       @relation("buyer", fields: [userBuyerId], references: [id])
+  buyer        User        @relation("buyer", fields: [userBuyerId], references: [id])
   userBuyerId  Int
-  product      Product    @relation(fields: [productId], references: [id])
+  product      Product     @relation(fields: [productId], references: [id])
   productId    Int
-  date         DateTime   @db.Date
-  statusSale   StatusSale
-  saleQuantity Int        @db.Int
-  pricePerUnit Int        @db.Int
-  total        Int        @db.Int
+  date         DateTime    @db.Date
+  statusSale   StatusSale? @default(A)
+  saleQuantity Int         @db.Int
+  pricePerUnit Int         @db.Int
+  total        Int         @db.Int
 
   @@map("salesPromise")
 }
