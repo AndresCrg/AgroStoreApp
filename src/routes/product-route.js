@@ -159,23 +159,298 @@ router.post(
  *       type: string
  *   responses:
  *    200:
- *     description: Producto creado exitosamente!
+ *     description: Ok
  *     content:
  *      application/json:
  *       schema:
  *        type: object
- *        $ref: '#/components/schemas/Product'
+ *        properties:
+ *         name:
+ *          type: string
+ *          description: Nombre del producto agícola
+ *         type:
+ *          type: string
+ *          description: Puede ser FRUITS, VEGETABLES, CEREALS, LEGOMINOUS, TUBERS
+ *         harvestDate:
+ *          type: string
+ *          description: Fecha de cosecha del producto agrícola
+ *         harverstLocation:
+ *          type: string
+ *          description: Ubicación donde se cosechó el producto agrícola
+ *         units:
+ *          type: string
+ *          description: Puede ser KG(Kilogramos), LB(Libras), AR(Arrobas)
+ *         quantityAvalible:
+ *          type: number
+ *          description: Cantidad del producto agríola disponible para la venta
+ *         pricePerunit:
+ *          type: number
+ *          description: Precio unitario del producto agrícola
+ *         image:
+ *          type: string
+ *          description: ruta de la imagen del producto agrícola
+ *         description:
+ *          type: string
+ *          description: Breve descripción del producto agrícola
+ *         state:
+ *          type: string
+ *          description: estado del producto agrícola
+ *         userId:
+ *          type: number
+ *          description: id del usuario que creó el producto agrícola
  *    404:
  *     description: Datos ingresados de forma incorrecta
  */
 router.get('/:id', getProductById);
 
+
+/**
+ * @swagger
+ * /api/products/:
+ *  get:
+ *   summary: Obtiene todos los productos activos
+ *   tags: [Products]
+ *   parameters:
+ *    - in: header
+ *      name: x-token
+ *      description: Debe ingresar el token en el header
+ *      required: true
+ *   responses:
+ *    200:
+ *     description: Ok
+ *     content:
+ *      application/json:
+ *       schema:
+ *        type: object
+ *        properties:
+ *         name:
+ *          type: string
+ *          description: Nombre del producto agícola
+ *         type:
+ *          type: string
+ *          description: Puede ser FRUITS, VEGETABLES, CEREALS, LEGOMINOUS, TUBERS
+ *         harvestDate:
+ *          type: string
+ *          description: Fecha de cosecha del producto agrícola
+ *         harverstLocation:
+ *          type: string
+ *          description: Ubicación donde se cosechó el producto agrícola
+ *         units:
+ *          type: string
+ *          description: Puede ser KG(Kilogramos), LB(Libras), AR(Arrobas)
+ *         quantityAvalible:
+ *          type: number
+ *          description: Cantidad del producto agríola disponible para la venta
+ *         pricePerunit:
+ *          type: number
+ *          description: Precio unitario del producto agrícola
+ *         image:
+ *          type: string
+ *          description: ruta de la imagen del producto agrícola
+ *         description:
+ *          type: string
+ *          description: Breve descripción del producto agrícola
+ *         state:
+ *          type: string
+ *          description: estado del producto agrícola
+ *         userId:
+ *          type: number
+ *          description: id del usuario que creó el producto agrícola
+ *    404:
+ *     description: Datos ingresados de forma incorrecta
+ */
 router.get('/', getAllProducts);
 
+
+/**
+ * @swagger
+ * /api/products/getUsersProduct/{userId}:
+ *  get:
+ *   summary: Obtener todos los productos por usuario
+ *   tags: [Products]
+ *   parameters:
+ *    - in: header
+ *      name: x-token
+ *      description: Debe ingresar el token en el header
+ *      required: true
+ *    - in: path
+ *      name: userId
+ *      required: true
+ *      description: Identificador único del usuario
+ *      schema:
+ *       type: string
+ *   responses:
+ *    200:
+ *     description: Ok
+ *     content:
+ *      application/json:
+ *       schema:
+ *        type: object
+ *        properties:
+ *         name:
+ *          type: string
+ *          description: Nombre del producto agícola
+ *         type:
+ *          type: string
+ *          description: Puede ser FRUITS, VEGETABLES, CEREALS, LEGOMINOUS, TUBERS
+ *         harvestDate:
+ *          type: string
+ *          description: Fecha de cosecha del producto agrícola
+ *         harverstLocation:
+ *          type: string
+ *          description: Ubicación donde se cosechó el producto agrícola
+ *         units:
+ *          type: string
+ *          description: Puede ser KG(Kilogramos), LB(Libras), AR(Arrobas)
+ *         quantityAvalible:
+ *          type: number
+ *          description: Cantidad del producto agríola disponible para la venta
+ *         pricePerunit:
+ *          type: number
+ *          description: Precio unitario del producto agrícola
+ *         image:
+ *          type: string
+ *          description: ruta de la imagen del producto agrícola
+ *         description:
+ *          type: string
+ *          description: Breve descripción del producto agrícola
+ *         state:
+ *          type: string
+ *          description: estado del producto agrícola
+ *         userId:
+ *          type: number
+ *          description: id del usuario que creó el producto agrícola
+ *    404:
+ *     description: Datos ingresados de forma incorrecta
+ */
 router.get('/getUsersProduct/:userId', getProductsByUser);
 
+
+/**
+ * @swagger
+ * /api/products/{id}:
+ *  put:
+ *   summary: Actualizar un producto
+ *   tags: [Products]
+ *   parameters:
+ *    - in: header
+ *      name: x-token
+ *      description: Debe ingresar el token en el header
+ *      required: true
+ *    - in: path
+ *      name: id
+ *      required: true
+ *      description: Identificador único del producto
+ *      schema:
+ *       type: string
+ *   responses:
+ *    200:
+ *     description: Producto actualizado exitosamente!
+ *     content:
+ *      application/json:
+ *       schema:
+ *        type: object
+ *        properties:
+ *         name:
+ *          type: string
+ *          description: Nombre del producto agícola
+ *         type:
+ *          type: string
+ *          description: Puede ser FRUITS, VEGETABLES, CEREALS, LEGOMINOUS, TUBERS
+ *         harvestDate:
+ *          type: string
+ *          description: Fecha de cosecha del producto agrícola
+ *         harverstLocation:
+ *          type: string
+ *          description: Ubicación donde se cosechó el producto agrícola
+ *         units:
+ *          type: string
+ *          description: Puede ser KG(Kilogramos), LB(Libras), AR(Arrobas)
+ *         quantityAvalible:
+ *          type: number
+ *          description: Cantidad del producto agríola disponible para la venta
+ *         pricePerunit:
+ *          type: number
+ *          description: Precio unitario del producto agrícola
+ *         image:
+ *          type: string
+ *          description: ruta de la imagen del producto agrícola
+ *         description:
+ *          type: string
+ *          description: Breve descripción del producto agrícola
+ *         state:
+ *          type: string
+ *          description: estado del producto agrícola
+ *         userId:
+ *          type: number
+ *          description: id del usuario que creó el producto agrícola
+ *    404:
+ *     description: Datos ingresados de forma incorrecta
+ */
 router.put('/:id', updateProduct);
 
+
+/**
+ * @swagger
+ * /api/products/{id}:
+ *  patch:
+ *   summary: Eliminar un producto
+ *   tags: [Products]
+ *   parameters:
+ *    - in: header
+ *      name: x-token
+ *      description: Debe ingresar el token en el header
+ *      required: true
+ *    - in: path
+ *      name: id
+ *      required: true
+ *      description: Identificador único del producto
+ *      schema:
+ *       type: string
+ *   responses:
+ *    200:
+ *     description: Producto eliminado exitosamente!
+ *     content:
+ *      application/json:
+ *       schema:
+ *        type: object
+ *        properties:
+ *         name:
+ *          type: string
+ *          description: Nombre del producto agícola
+ *         type:
+ *          type: string
+ *          description: Puede ser FRUITS, VEGETABLES, CEREALS, LEGOMINOUS, TUBERS
+ *         harvestDate:
+ *          type: string
+ *          description: Fecha de cosecha del producto agrícola
+ *         harverstLocation:
+ *          type: string
+ *          description: Ubicación donde se cosechó el producto agrícola
+ *         units:
+ *          type: string
+ *          description: Puede ser KG(Kilogramos), LB(Libras), AR(Arrobas)
+ *         quantityAvalible:
+ *          type: number
+ *          description: Cantidad del producto agríola disponible para la venta
+ *         pricePerunit:
+ *          type: number
+ *          description: Precio unitario del producto agrícola
+ *         image:
+ *          type: string
+ *          description: ruta de la imagen del producto agrícola
+ *         description:
+ *          type: string
+ *          description: Breve descripción del producto agrícola
+ *         state:
+ *          type: string
+ *          description: estado del producto agrícola
+ *         userId:
+ *          type: number
+ *          description: id del usuario que creó el producto agrícola
+ *    404:
+ *     description: Datos ingresados de forma incorrecta
+ */
 router.patch('/:id', deleteProduct);
 
 module.exports = router;

@@ -41,26 +41,14 @@ const getProductById = async (req, res) => {
 };
 
 const getAllProducts = async (req, res) => {
-	const results = await prisma.product.findMany({});
+	const results = await prisma.product.findMany({
+		where: {
+			state: 'A',
+		},
+	});
 	res.json({
 		success: 1,
 		data: results,
-	});
-};
-
-const updateProduct = async (req, res) => {
-	const id = req.params.id;
-	const { ...toUpdate } = req.body;
-	const result = await prisma.product.update({
-		where: {
-			id: parseInt(id),
-		},
-		data: toUpdate,
-	});
-
-	res.json({
-		msg: 'Producto actualizado exitosamente!',
-		data: result,
 	});
 };
 
@@ -80,6 +68,22 @@ const getProductsByUser = async (req, res) => {
 	});
 	res.json({
 		data: results,
+	});
+};
+
+const updateProduct = async (req, res) => {
+	const id = req.params.id;
+	const { ...toUpdate } = req.body;
+	const result = await prisma.product.update({
+		where: {
+			id: parseInt(id),
+		},
+		data: toUpdate,
+	});
+
+	res.json({
+		msg: 'Producto actualizado exitosamente!',
+		data: result,
 	});
 };
 
