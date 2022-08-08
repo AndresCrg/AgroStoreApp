@@ -48,6 +48,39 @@ const getAllProducts = async (req, res) => {
 	});
 };
 
+const getProductsByUser = async (req, res) => {
+	const userId = parseInt(req.params.userId);
+	const results = await prisma.product.findMany({
+		where: {
+			AND: [
+				{
+					userId,
+				},
+				{
+					state: 'A',
+				},
+			],
+		},
+	});
+	res.json({
+		data: results,
+	});
+};
+
+const getProductsToBuy = async (req, res) => {
+	const userId = req.params.userId;
+	const results = await prisma.product.findMany({
+		where: {
+			userId: {
+				not: userId,
+			},
+		},
+	});
+	res.json({
+		data: results,
+	});
+};
+
 const updateProduct = async (req, res) => {
 	const id = req.params.id;
 	const { ...toUpdate } = req.body;
@@ -64,19 +97,19 @@ const updateProduct = async (req, res) => {
 	});
 };
 
-const getProductsByUser = async (req, res) => {
-	const userId = parseInt(req.params.userId);
-	const results = await prisma.product.findMany({
+const deleteProduct = async (req, res) => {
+	const id = req.params.id;
+	const result = await prisma.product.update({
 		where: {
-			userId
+			id,
 		},
+		state: 'D',
 	});
 	res.json({
-		data: results,
+		msg: 'Producto eliminado exitosamente!',
+		data: result,
 	});
 };
-
-const deleteProduct = (req, res) => {};
 
 module.exports = {
 	createProduct,
@@ -84,5 +117,6 @@ module.exports = {
 	getAllProducts,
 	updateProduct,
 	getProductsByUser,
+	getProductsToBuy,
 	deleteProduct,
 };
