@@ -5,6 +5,124 @@ const { validateFields } = require('../middlewares/validate-filelds');
 
 const router = Router();
 
+/**
+ * @swagger
+ * components:
+ *  schemas:
+ *   Product:
+ *    type: object
+ *    properties:
+ *     name:
+ *      type: string
+ *      description: Nombre del producto agícola
+ *     type:
+ *      type: string
+ *      description: Puede ser FRUITS, VEGETABLES, CEREALS, LEGOMINOUS, TUBERS
+ *     harvestDate:
+ *      type: string
+ *      description: Fecha de cosecha del producto agrícola
+ *     harverstLocation:
+ *      type: string
+ *      description: Ubicación donde se cosechó el producto agrícola
+ *     units:
+ *      type: string
+ *      description: Puede ser KG(Kilogramos), LB(Libras), AR(Arrobas)
+ *     quantityAvalible:
+ *      type: number
+ *      description: Cantidad del producto agríola disponible para la venta
+ *     pricePerunit:
+ *      type: number
+ *      description: Precio unitario del producto agrícola
+ *     image:
+ *      type: string
+ *      description: ruta de la imagen del producto agrícola
+ *     description:
+ *      type: string
+ *      description: Breve descripción del producto agrícola
+ *     state:
+ *      type: string
+ *      description: estado del producto agrícola
+ *    required:
+ *     - name
+ *     - type
+ *     - harvestDate
+ *     - harvestLocation
+ *     - units
+ *     - quantityAvalible
+ *     - pricePerunit
+ *     - image
+ *     - description
+ *     - userId
+ */
+
+/**
+ * @swagger
+ * /api/products/{userId}:
+ *  post:
+ *   summary: Crear nuevo producto
+ *   tags: [Products]
+ *   parameters:
+ *    - in: header
+ *      name: x-token
+ *      description: Debe ingresar el token en el header
+ *      required: true
+ *    - in: path
+ *      name: userId
+ *      required: true
+ *      description: Documento del usuario
+ *      schema:
+ *       type: string
+ *   requestBody:
+ *    required: true
+ *    content:
+ *     application/json:
+ *      schema:
+ *       type: object
+ *       $ref: '#/components/schemas/Product'
+ *   responses:
+ *    200:
+ *     description: Producto creado exitosamente!
+ *     content:
+ *      application/json:
+ *       schema:
+ *        type: object
+ *        properties:
+ *         name:
+ *          type: string
+ *          description: Nombre del producto agícola
+ *         type:
+ *          type: string
+ *          description: Puede ser FRUITS, VEGETABLES, CEREALS, LEGOMINOUS, TUBERS
+ *         harvestDate:
+ *          type: string
+ *          description: Fecha de cosecha del producto agrícola
+ *         harverstLocation:
+ *          type: string
+ *          description: Ubicación donde se cosechó el producto agrícola
+ *         units:
+ *          type: string
+ *          description: Puede ser KG(Kilogramos), LB(Libras), AR(Arrobas)
+ *         quantityAvalible:
+ *          type: number
+ *          description: Cantidad del producto agríola disponible para la venta
+ *         pricePerunit:
+ *          type: number
+ *          description: Precio unitario del producto agrícola
+ *         image:
+ *          type: string
+ *          description: ruta de la imagen del producto agrícola
+ *         description:
+ *          type: string
+ *          description: Breve descripción del producto agrícola
+ *         state:
+ *          type: string
+ *          description: estado del producto agrícola
+ *         userId:
+ *          type: number
+ *          description: id del usuario que creó el producto agrícola
+ *    404:
+ *     description: Datos ingresados de forma incorrecta
+ */
 router.post(
 	'/:userId',
 	[
@@ -22,6 +140,34 @@ router.post(
 	createProduct
 );
 
+/**
+ * @swagger
+ * /api/products/{id}:
+ *  get:
+ *   summary: Obtener producto por id
+ *   tags: [Products]
+ *   parameters:
+ *    - in: header
+ *      name: x-token
+ *      description: Debe ingresar el token en el header
+ *      required: true
+ *    - in: path
+ *      name: id
+ *      required: true
+ *      description: Identificador único del producto
+ *      schema:
+ *       type: string
+ *   responses:
+ *    200:
+ *     description: Producto creado exitosamente!
+ *     content:
+ *      application/json:
+ *       schema:
+ *        type: object
+ *        $ref: '#/components/schemas/Product'
+ *    404:
+ *     description: Datos ingresados de forma incorrecta
+ */
 router.get('/:id', getProductById);
 
 router.get('/', getAllProducts);

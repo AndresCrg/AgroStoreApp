@@ -68,7 +68,14 @@ const getProductsByUser = async (req, res) => {
 	const userId = parseInt(req.params.userId);
 	const results = await prisma.product.findMany({
 		where: {
-			userId,
+			AND: [
+				{
+					userId,
+				},
+				{
+					state: 'A',
+				},
+			],
 		},
 	});
 	res.json({
