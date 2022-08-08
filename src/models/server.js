@@ -15,6 +15,7 @@ class Server {
 		this.pathSalePromise = '/api/salePromises';
 		this.middleware();
 		this.routes();
+		this.app.use(cors());
 	}
 
 	middleware() {

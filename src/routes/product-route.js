@@ -26,7 +26,7 @@ router.get('/:id', getProductById);
 
 router.get('/', getAllProducts);
 
-router.get('/:userId/:email', getProductsByUser);
+router.get('/getUsersProduct/:userId', getProductsByUser);
 
 router.put('/:id', updateProduct);
 
