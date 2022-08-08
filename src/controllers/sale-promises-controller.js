@@ -44,20 +44,23 @@ const getAllSalePromises = async (req, res) => {
 	});
 };
 
-const getSalePromiseByUser = async (req, res) => {
+const getPromiseByUser = async (req, res) => {
 	const userId = parseInt(req.params.userId);
-	const results = await prisma.salePromise.findMany({
-		where: {
-			OR: [
-				{
-					userSellerId: userId,
-				},
-				{
-					userBuyerId: userId,
-				},
-			],
-		},
-	});
+	const role = req.params.role;
+	let results = {};
+	if (role === 'seller') {
+		results = await prisma.salePromise.findMany({
+			where: {
+				userSellerId: userId,
+			},
+		});
+	} else if (role === 'buyer') {
+		results = await prisma.salePromise.findMany({
+			where: {
+				userBuyerId: userId,
+			},
+		});
+	}
 	res.json({
 		data: results,
 	});
@@ -66,5 +69,5 @@ const getSalePromiseByUser = async (req, res) => {
 module.exports = {
 	createSalePromise,
 	getAllSalePromises,
-	getSalePromiseByUser,
+	getPromiseByUser,
 };
