@@ -31,10 +31,10 @@ const createUser = async (req, res) => {
 };
 
 const getUserById = async (req, res) => {
-	const id = req.params.id;
+	const id = parseInt(req.params.id);
 	const result = await prisma.user.findUnique({
 		where: {
-			document: id,
+			id,
 		},
 	});
 	res.json({

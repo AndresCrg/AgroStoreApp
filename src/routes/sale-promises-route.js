@@ -1,5 +1,5 @@
 const { Router } = require('express');
-const { createSalePromise, getAllSalePromises, getPromiseByUser } = require('../controllers/sale-promises-controller');
+const { createSalePromise, getAllSalePromises, getPromiseByUser, setStatePromise } = require('../controllers/sale-promises-controller');
 const { validateJWT } = require('../middlewares/validate-jwt');
 
 const router = Router();
@@ -179,5 +179,7 @@ router.get('/', [validateJWT], getAllSalePromises);
  *     description: Datos ingresados de forma incorrecta
  */
 router.get('/:userId/:role', [validateJWT], getPromiseByUser);
+
+router.put('/:id/:newState', setStatePromise)
 
 module.exports = router;
