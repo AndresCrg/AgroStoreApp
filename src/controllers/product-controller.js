@@ -41,11 +41,7 @@ const getProductById = async (req, res) => {
 };
 
 const getAllProducts = async (req, res) => {
-	const results = await prisma.product.findMany({
-		where: {
-			state: 'A',
-		},
-	});
+	const results = await prisma.product.findMany({});
 	res.json({
 		success: 1,
 		data: results,
@@ -64,6 +60,20 @@ const getProductsByUser = async (req, res) => {
 					state: 'A',
 				},
 			],
+		},
+	});
+	res.json({
+		data: results,
+	});
+};
+
+const getProductsToBuy = async (req, res) => {
+	const userId = req.params.userId;
+	const results = await prisma.product.findMany({
+		where: {
+			userId: {
+				not: userId,
+			},
 		},
 	});
 	res.json({
@@ -107,5 +117,6 @@ module.exports = {
 	getAllProducts,
 	updateProduct,
 	getProductsByUser,
+	getProductsToBuy,
 	deleteProduct,
 };

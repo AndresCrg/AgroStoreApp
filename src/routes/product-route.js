@@ -1,6 +1,6 @@
 const { Router } = require('express');
 const { check } = require('express-validator');
-const { createProduct, getProductById, getAllProducts, updateProduct, deleteProduct, getProductsByUser } = require('../controllers/product-controller');
+const { createProduct, getProductById, getAllProducts, updateProduct, deleteProduct, getProductsByUser, getProductsToBuy } = require('../controllers/product-controller');
 const { validateFields } = require('../middlewares/validate-filelds');
 
 const router = Router();
@@ -324,6 +324,8 @@ router.get('/', getAllProducts);
  *     description: Datos ingresados de forma incorrecta
  */
 router.get('/getUsersProduct/:userId', getProductsByUser);
+
+router.get('/getProductsToBuy/:userId', getProductsToBuy);
 
 
 /**
