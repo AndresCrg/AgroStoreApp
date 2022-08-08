@@ -32,7 +32,7 @@ const getProductById = async (req, res) => {
 	const id = req.params.id;
 	const result = await prisma.product.findUnique({
 		where: {
-			id: parseInt(id)
+			id: parseInt(id),
 		},
 	});
 	res.json({
@@ -53,7 +53,7 @@ const updateProduct = async (req, res) => {
 	const { ...toUpdate } = req.body;
 	const result = await prisma.product.update({
 		where: {
-			id: parseInt(id)
+			id: parseInt(id),
 		},
 		data: toUpdate,
 	});
@@ -65,10 +65,10 @@ const updateProduct = async (req, res) => {
 };
 
 const getProductsByUser = async (req, res) => {
-	const { userId } = req.body;
+	const userId = parseInt(req.params.userId);
 	const results = await prisma.product.findMany({
 		where: {
-			userId
+			userId,
 		},
 	});
 	res.json({
