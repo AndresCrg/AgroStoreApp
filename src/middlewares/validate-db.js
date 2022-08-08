@@ -5,20 +5,20 @@ const { prisma } = require('../controllers/user-controller');
  * Employees
  */
 
-const documentExist = async (document = '') => {
+const documentExist = async (id = -1) => {
 
-	const existDocument = await prisma.user.findFirst({ where: { document } });
+	const existDocument = await prisma.user.findFirst({ where: { id: parseInt(id) } });
 	if (existDocument) {
-		throw new Error(`El documento: ${document}, ya está registrado!`);
+		throw new Error(`El documento: ${id}, ya está registrado!`);
 	}
 };
 
-const documentExistById = async (document = '') => {
+const documentExistById = async (id = -1) => {
 	const existDocument = await prisma.user.findUnique({
-		where: { document },
+		where: { id: parseInt(id)},
 	});
 	if (!existDocument) {
-		throw new Error(`El documento ${document} no esta registrado!`);
+		throw new Error(`El documento ${id} no esta registrado!`);
 	}
 };
 

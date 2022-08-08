@@ -32,7 +32,7 @@ const getProductById = async (req, res) => {
 	const id = req.params.id;
 	const result = await prisma.product.findUnique({
 		where: {
-			id: parseInt(id),
+			id: parseInt(id)
 		},
 	});
 	res.json({
@@ -68,7 +68,7 @@ const getProductsByUser = async (req, res) => {
 };
 
 const getProductsToBuy = async (req, res) => {
-	const userId = req.params.userId;
+	const userId = parseInt(req.params.userId);
 	const results = await prisma.product.findMany({
 		where: {
 			userId: {
@@ -86,7 +86,7 @@ const updateProduct = async (req, res) => {
 	const { ...toUpdate } = req.body;
 	const result = await prisma.product.update({
 		where: {
-			id: parseInt(id),
+			id: parseInt(id)
 		},
 		data: toUpdate,
 	});
@@ -98,12 +98,12 @@ const updateProduct = async (req, res) => {
 };
 
 const deleteProduct = async (req, res) => {
-	const id = req.params.id;
+	const id = parseInt(req.params.id);
 	const result = await prisma.product.update({
 		where: {
 			id,
 		},
-		state: 'D',
+		data: {state: 'D'}
 	});
 	res.json({
 		msg: 'Producto eliminado exitosamente!',
