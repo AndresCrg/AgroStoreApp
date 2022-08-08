@@ -133,7 +133,7 @@ router.get('/:id', [validateJWT, check('id').custom(documentExistById), validate
  *     description: Datos ingresados de forma incorrecta
  *
  */
-router.get('/', getUsers);
+router.get('/', [validateJWT], getUsers);
 
 /**
  * @swagger

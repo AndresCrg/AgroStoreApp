@@ -1,7 +1,16 @@
 const { Router } = require('express');
 const { check } = require('express-validator');
-const { createProduct, getProductById, getAllProducts, updateProduct, deleteProduct, getProductsByUser, getProductsToBuy } = require('../controllers/product-controller');
+const {
+	createProduct,
+	getProductById,
+	getAllProducts,
+	updateProduct,
+	deleteProduct,
+	getProductsByUser,
+	getProductsToBuy,
+} = require('../controllers/product-controller');
 const { validateFields } = require('../middlewares/validate-filelds');
+const { validateJWT } = require('../middlewares/validate-jwt');
 
 const router = Router();
 
@@ -126,6 +135,7 @@ const router = Router();
 router.post(
 	'/:userId',
 	[
+		validateJWT,
 		check('name', 'El nombre es obligatorio').not().isEmpty(),
 		check('type', 'El tipo de cultivo no es valido!').isIn(['FRUITS', 'CEREALS', 'LEGOMINOUS', 'VEGETABLES', 'TUBERS']),
 		check('harvestDate', 'No es formato de fecha válido').not().isEmpty().isDate(),
@@ -201,8 +211,7 @@ router.post(
  *    404:
  *     description: Datos ingresados de forma incorrecta
  */
-router.get('/:id', getProductById);
-
+router.get('/:id', [validateJWT], getProductById);
 
 /**
  * @swagger
@@ -259,8 +268,7 @@ router.get('/:id', getProductById);
  *    404:
  *     description: Datos ingresados de forma incorrecta
  */
-router.get('/', getAllProducts);
-
+router.get('/', [validateJWT], getAllProducts);
 
 /**
  * @swagger
@@ -323,10 +331,9 @@ router.get('/', getAllProducts);
  *    404:
  *     description: Datos ingresados de forma incorrecta
  */
-router.get('/getUsersProduct/:userId', getProductsByUser);
+router.get('/getUsersProduct/:userId', [validateJWT], getProductsByUser);
 
-router.get('/getProductsToBuy/:userId', getProductsToBuy);
-
+router.get('/getProductsToBuy/:userId', [validateJWT], getProductsToBuy);
 
 /**
  * @swagger
@@ -389,8 +396,7 @@ router.get('/getProductsToBuy/:userId', getProductsToBuy);
  *    404:
  *     description: Datos ingresados de forma incorrecta
  */
-router.put('/:id', updateProduct);
-
+router.put('/:id', [validateJWT], updateProduct);
 
 /**
  * @swagger
@@ -453,6 +459,6 @@ router.put('/:id', updateProduct);
  *    404:
  *     description: Datos ingresados de forma incorrecta
  */
-router.patch('/:id', deleteProduct);
+router.patch('/:id', [validateJWT], deleteProduct);
 
 module.exports = router;

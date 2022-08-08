@@ -31,7 +31,7 @@ const createSalePromise = async (req, res) => {
 		},
 	});
 	res.json({
-		msg: 'Promesa de venta creada exitosamente!',
+		msg: 'Promesa de compra/venta creada exitosamente!',
 		data: result,
 	});
 };
