@@ -36,6 +36,35 @@ const createSalePromise = async (req, res) => {
 	});
 };
 
+const getAllSalePromises = async (req, res) => {
+	const results = await prisma.salePromise.findMany({});
+	res.json({
+		success: 1,
+		data: results,
+	});
+};
+
+const getSalePromiseByUser = async (req, res) => {
+	const userId = parseInt(req.params.userId);
+	const results = await prisma.salePromise.findMany({
+		where: {
+			OR: [
+				{
+					userSellerId: userId,
+				},
+				{
+					userBuyerId: userId,
+				},
+			],
+		},
+	});
+	res.json({
+		data: results,
+	});
+};
+
 module.exports = {
 	createSalePromise,
+	getAllSalePromises,
+	getSalePromiseByUser,
 };
