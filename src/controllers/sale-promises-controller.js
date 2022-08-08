@@ -71,8 +71,24 @@ const getPromiseByUser = async (req, res) => {
     });
 };
 
+const setStatePromise = async (req, res) => {
+	const id = req.params.id;
+	const newState = req.params.newState;
+	const result = await prisma.salePromise.update({
+		where: {
+			id,
+		},
+		statusSale: newState,
+	});
+	res.json({
+		msg: 'Estado de la compra/venta actualizada correctamente',
+		data: result,
+	});
+};
+
 module.exports = {
     createSalePromise,
     getAllSalePromises,
     getPromiseByUser,
+	  setStatePromise,
 };
