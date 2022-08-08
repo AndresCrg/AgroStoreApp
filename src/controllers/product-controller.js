@@ -65,7 +65,7 @@ const updateProduct = async (req, res) => {
 };
 
 const getProductsByUser = async (req, res) => {
-	const { userId } = req.body;
+	const userId = parseInt(req.params.userId);
 	const results = await prisma.product.findMany({
 		where: {
 			userId
