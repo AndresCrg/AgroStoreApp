@@ -31,10 +31,10 @@ const createUser = async (req, res) => {
 };
 
 const getUserById = async (req, res) => {
-	const id = req.params.id;
+	const id = parseInt(req.params.id);
 	const result = await prisma.user.findUnique({
 		where: {
-			document: id,
+			id,
 		},
 	});
 	res.json({
@@ -52,20 +52,20 @@ const getUsers = async (req, res) => {
 };
 
 const updateUser = async (req, res = response) => {
-	const document = req.params.id;
+	const id = parseInt(req.params.id);
 	const { credentialId } = req.body;
 	const { ...toUpdate } = req.body;
 	let result;
 	result = await prisma.user.update({
 		where: {
-			document,
+			id,
 		},
 		data: toUpdate,
 	});
 	if (credentialId) {
 		result = await prisma.user.update({
 			where: {
-				document,
+				id,
 			},
 			data: {
 				credential: {

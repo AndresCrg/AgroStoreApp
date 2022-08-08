@@ -168,6 +168,6 @@ router.get('/', [validateJWT], getUsers);
  *     description: Datos ingresados de forma incorrecta
  *
  */
-router.put('/:id', [validateJWT, check('document').custom(documentExistById), validateFields], updateUser);
+router.put('/:id', [validateJWT, check('id').custom(documentExistById), validateFields], updateUser);
 
 module.exports = router;
